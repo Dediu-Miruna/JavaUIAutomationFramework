@@ -10,27 +10,29 @@ public class DriverManager {
     private static String webDriverType = "Chrome";
     private static DriverManager instance;
     private WebDriver driver;
+
     private DriverManager(){
-        switch (webDriverType){
-            case "Chrome":
+        switch (webDriverType.toUpperCase()){
+            case "CHROME":
                 driver = new ChromeDriver();
-                System.out.println("Chrome driver was initiated");
+                System.out.println("The Chrome Driver was initiated!");
                 break;
-            case "Firefox":
+            case "FIREFOX":
                 driver = new FirefoxDriver();
-                System.out.println("Firefox was initiated");
+                System.out.println("The Firefox Driver was initiated!");
                 break;
-            case "Safari":
+            case "SAFARI":
                 driver = new SafariDriver();
-                System.out.println("Safari initiated");
+                System.out.println("The Safari Browser was initiated!");
                 break;
-            case "Edge":
+            case "EDGE":
                 driver = new EdgeDriver();
-                System.out.println("Edge was initiated");
+                System.out.println("The Edge Browser was initiated!");
                 break;
             default:
-                System.out.println("The webDriverType....");
+                System.out.println("The webDriverType " + webDriverType + " is not defined!");
         }
+        driver.manage().window().maximize();
     }
 
     public static DriverManager getInstance(){
@@ -40,13 +42,10 @@ public class DriverManager {
         return instance;
     }
 
-    public WebDriver getDriver() {
+    public WebDriver getDriver(){
         if (driver == null){
-            DriverManager.getInstance();
+            getInstance();
         }
         return driver;
     }
 }
-
-
-
